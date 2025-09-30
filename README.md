@@ -1,1 +1,1 @@
-# ozcoding-schoole-15th
+# ozcoding-school-15th
