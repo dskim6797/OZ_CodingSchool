@@ -2,7 +2,6 @@ from models.transaction import Transaction
 from utils.decorators import validate_transaction
 
 class Account:
-
     # __balance와 transactions 리스트를 초기화하는 생성자를 구현합니다.
     # 입금을 위한 deposit 메서드를 구현합니다.
     # 출금을 위한 withdraw 메서드를 구현합니다.
@@ -18,7 +17,6 @@ class Account:
         self.__balance += amount
         self.transactions.append(Transaction("입금", amount, self.__balance))
         
-
     @validate_transaction
     def withdraw(self, amount: int) -> None: 
         self.__balance -= amount

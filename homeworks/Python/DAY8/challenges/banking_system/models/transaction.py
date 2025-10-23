@@ -1,5 +1,4 @@
 class Transaction:
-
     # 거래(Transaction) 클래스를 정의하고, transaction_type, amount, balance 속성을 초기화하는 생성자를 구현합니다.
     # 거래 정보를 문자열로 반환하는 str 메서드를 구현합니다.
     # 거래 정보를 튜플로 반환하는 to_tuple 메서드를 구현합니다.
