@@ -7,23 +7,18 @@ def main():
     while True:
         try:
             option = input("1. 사용자 추가, 2: 사용자 찾기, 3: 사용자 메뉴, 4: 종료 : ")
-            
             if option == '1':
                 add_username = input("사용자 추가. 사용자 명:")
                 banking_service.add_user(add_username)
-                
             elif option == '2':
                 find_username = input("사용자 찾기. 사용자 명:")
                 banking_service.find_user(find_username)
-                
             elif option == '3':
                 username = input("메뉴를 이용할 사용자 명:")
                 banking_service.user_menu(username)
-                
             elif option == '4':
                 print("서비스를 종료합니다.")
                 break
-            
             else:
                 print("잘못된 입력입니다. 다시 시도하세요.")
                 
