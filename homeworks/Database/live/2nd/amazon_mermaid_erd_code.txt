@@ -1,0 +1,67 @@
+erDiagram
+    %% 1. 엔티티(테이블) 정의 및 관계 설정
+    
+    %% N:N 해소 관계: 회원(USER)과 도서(BOOK)의 구매 관계
+    USER ||--o{ ORDER : "생성"
+    ORDER ||--o{ ORDER_ITEM : "포함"
+    BOOK ||--o{ ORDER_ITEM : "대상"
+    
+    %% 1:N 관계: 회원(USER)은 리뷰(REVIEW)를 작성
+    USER ||--o{ REVIEW_INFO : "작성"
+    
+    %% 1:N 관계: 도서(BOOK)는 리뷰(REVIEW)를 받음
+    BOOK ||--o{ REVIEW_INFO : "받음"
+    
+    %% 1:N 관계: 도서(BOOK)와 저자(AUTHOR) 관계 (새로 추론)
+    AUTHOR ||--o{ BOOK : "집필"
+    
+    
+    %% 2. 테이블 상세 속성 정의 (FK 추가)
+    
+    USER {
+        int 회원_id PK "회원 식별자"
+        varchar 회원명 "이름"
+        varchar 전화번호 "연락처"
+        varchar 주소 "주소"
+    }
+
+    BOOK {
+        int 도서_id PK "도서 식별자"
+        int 저자_id FK "집필 저자 (AUTHOR)"
+        varchar 제목 "도서 제목"
+        varchar 저자_이름 "저자명 (중복 저장)"
+        int 가격 "가격"
+        int 재고 "재고 수량"
+    }
+    
+    AUTHOR {
+        int 저자_id PK "저자 식별자"
+        varchar 저자명 "저자 이름"
+        varchar 집필도서 "대표 도서 목록 (비정규화)"
+    }
+
+    REVIEW_INFO {
+        int 리뷰_id PK "리뷰 식별자"
+        int 회원_id FK "작성자 (USER)"
+        int 도서_id FK "리뷰 대상 도서 (BOOK)"
+        text 리뷰내용 "내용"
+        int 리뷰점수 "평점"
+        datetime 리뷰일시 "작성 일시"
+    }
+
+    ORDER {
+        int 주문_id PK "주문 식별자"
+        int 회원_id FK "주문자 (USER)"
+        datetime 주문일자 "주문 시각"
+        text 주문자_정보 "주문자 이름/전화번호 (USER FK로 대체)"
+        int 총금액
+    }
+    
+    %% N:N 해소를 위한 주문-상품 중개 테이블 (USER:BOOK 관계는 ORDER_ITEM으로 대체)
+    ORDER_ITEM {
+        int 주문_항목_id PK "항목 식별자"
+        int 주문_id FK "속한 주문 (ORDER)"
+        int 도서_id FK "구매 도서 (BOOK)"
+        int 수량 "구매 수량"
+        int 주문_당시_가격 "당시 가격"
+    }

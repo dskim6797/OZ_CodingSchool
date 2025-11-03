@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // undefined & null
+        let number; // 이 변수의 값은 아직 정의되지 않음: undefined
+        console.log(number)
+        number = 0 // 이 변수의 값은 0임
+        console.log(number)
+        number = null // 이 변수에는 아무것도 없음: null
+        console.log(number)
+        console.log(prompt("입력 테스트1 - 빈칸 확인")) // 빈 문자열 반환
+        console.log(prompt("입력 테스트2 - 취소")) // null 반환
+
+        // boolean
+        let value
+        value = true
+        console.log(value)
+        value = false
+        console.log(value)
+        // value = True // 에러 - js에서는 boolean 타입을 소문자로만 쓴다
+        // console.log(value) 
+
+        // window.confirm(): 사용자에게 확인/취소 중 하나 선택하게 함 - true/false 반환
+        let answer = confirm("강의를 성실히 수강하였습니까?")
+        console.log(`is성실: ${answer}`)
+    </script>
+</body>
+</html>

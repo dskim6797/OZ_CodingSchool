@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const data1 = '데이터'
+        const str1 = '문자열 중간에 ${data1} 삽입하기'
+        const str2 = `문자열 중간에 ${data1} 삽입하기`
+        console.log(str1)
+        console.log(str2)
+
+        let data2 = 100
+        const str3 = `문자열 중간에 ${data2} 삽입하기`
+        console.log(str3)
+
+        const str4 = '이건 될까???'
+        const str5 = `이게 되네! ${prompt(`${str4}`)}`
+        console.log(str5)
+    </script>
+</body>
+</html>
