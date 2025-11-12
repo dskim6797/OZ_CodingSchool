@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}결과{% endblock %}
+
+{% block content %}
+  <h2>설문 결과</h2>
+  <ul>
+      <!-- TODO: answers 리스트 안에 있는 값을 하나씩 꺼내서 li 태그로 출력해주세요 -->
+      {% for answer in answers %}
+        <li>{{ answer }}</li>
+      {% endfor %}
+  </ul>
+{% endblock %}
