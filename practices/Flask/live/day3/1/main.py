@@ -91,8 +91,6 @@ if users:
 else:
     print("----------- 빈 DB")
 
-
-
 db.close()
 
 
