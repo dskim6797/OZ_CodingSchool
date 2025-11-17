@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>다중 클라이언트 채팅</title>
+</head>
+<body>
+    <h1>채팅방</h1>
+    <input id="msg" placeholder="메시지 입력" />
+    <button onclick="sendMsg()">Send</button>
+    <ul id="chat"></ul>
+
+    <script>
+    let ws = new WebSocket("ws://127.0.0.1:5000/ws");
+
+    ws.onmessage = (event) => {
+        let li = document.createElement("li");
+        li.textContent = event.data;
+        document.getElementById("chat").appendChild(li);
+    };
+
+    function sendMsg() {
+        let msg = document.getElementById("msg").value;
+        ws.send(msg);
+      document.getElementById("msg").value = ""; // 입력창 비우기
+    }
+    </script>
+</body>
+</html>

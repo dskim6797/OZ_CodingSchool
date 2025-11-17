@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>실시간 비트코인 가격</title>
+  </head>
+  <body>
+    <h1>실시간 비트코인 가격</h1>
+    <h2 id="price">연결 중...</h2>
+
+    <script>
+      const ws = new WebSocket("ws://127.0.0.1:5000/ws");
+      const price = document.getElementById("price");
+
+      ws.onmessage = (event) => {
+        price.textContent = event.data;
+      };
+    </script>
+  </body>
+</html>
