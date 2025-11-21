@@ -6,6 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.session import engine, Base
 from app.dependencies import get_db
+from app.routers import user as user_router
 
 
 @asynccontextmanager
@@ -17,7 +18,9 @@ async def lifespan(app: FastAPI):
     await engine.dispose()
 
 
-app = FastAPI(title="My Blog API (Day 1)", lifespan=lifespan)
+app = FastAPI(title="My Blog API (Day 2)", lifespan=lifespan)
+
+app.include_router(user_router.router)
 
 
 @app.get("/", summary="DB 연결 헬스 체크")

@@ -1,6 +1,8 @@
 # app/db/session.py
 from pydantic_settings import BaseSettings
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.ext.asyncio import async_sessionmaker
+from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.orm import declarative_base
 
 
@@ -30,9 +32,9 @@ engine = create_async_engine(
     settings.async_db_url,
     echo=True,
     pool_pre_ping=True,
-    pool_size=10,        # 커넥션 풀 크기
-    max_overflow=10,     # 커넥션 풀 최대 초과 크기
-    pool_timeout=30,     # 커넥션 풀 타임아웃 시간 (30초)
+    pool_size=10,  # 커넥션 풀 크기
+    max_overflow=10,  # 커넥션 풀 최대 초과 크기
+    pool_timeout=30,  # 커넥션 풀 타임아웃 시간 (30초)
 )
 
 AsyncSessionLocal = async_sessionmaker(

@@ -5,11 +5,64 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "argon2-cffi>=25.1.0",
     "asyncpg>=0.30.0",
+    "bcrypt>=5.0.0",
     "fastapi>=0.121.3",
     "greenlet>=3.2.4",
+    "passlib>=1.7.4",
     "pydantic-settings>=2.12.0",
+    "pydantic[email]>=2.12.4",
+    "python-jose>=3.5.0",
     "ruff>=0.14.5",
     "sqlalchemy>=2.0.44",
     "uvicorn[standard]>=0.38.0",
 ]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.5",
+]
+
+[tool.ruff]
+# 적용할 디렉토리
+src = ["app"]
+
+# 무시할 경로
+exclude = [
+    ".venv",
+    "migrations",
+    "__pycache__",
+]
+
+# Python 버전 명시
+target-version = "py313"
+
+# 사용할 규칙 세트 (E, F: 기본, I: import 정렬, UP: pyupgrade)
+lint.select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "N",   # pep8-naming
+]
+
+# 프로젝트 성격에 맞게 무시할 규칙
+lint.ignore = [
+    "E501",  # line too long → black이 처리
+]
+
+# 최대 복잡도 (순환 복잡도)
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+# isort 스타일 (import 정렬)
+[tool.ruff.lint.isort]
+combine-as-imports = true
+force-single-line = true
+lines-after-imports = 2
+known-third-party = ["fastapi", "sqlalchemy", "pydantic"]
+
+# docstring 스타일 검사 (선택)
+[tool.ruff.lint.pydocstyle]
+convention = "google"

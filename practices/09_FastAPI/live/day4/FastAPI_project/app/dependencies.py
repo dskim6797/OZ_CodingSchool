@@ -1,8 +1,8 @@
 # app/dependencies.py
-from sqlalchemy import event
-from sqlalchemy.orm import Session
-from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.session import AsyncSessionLocal
+from sqlalchemy import event
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import Session
 
 
 # ------------------------ DML 감지 로직 ------------------------
@@ -48,4 +48,3 @@ async def get_db() -> AsyncSession:
                 await session.rollback()
             raise
         # async with 블록 종료 시 세션/커넥션은 자동 close
-
