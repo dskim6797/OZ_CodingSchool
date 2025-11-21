@@ -20,10 +20,18 @@ Thumbs.db
 *.log
 logs/
 
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
 # 의존성 폴더
 node_modules/
 venv/
-__pycache__/
+.venv
 
 # 환경 설정 파일 (중요한 정보 포함)
 .env
@@ -31,11 +39,11 @@ config.ini
 secrets.json
 
 # 빌드 결과물
-dist/
-build/
 *.exe
 *.dmg
 
 # 임시 파일
 *.tmp
 *.temp
+
+
