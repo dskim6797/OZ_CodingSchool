@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "when2meet"
+version = "0.1.0"
+description = ""
+authors = ["dskim6797 <dskim6797@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.121.3"
+uvicorn = "^0.38.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "24.10.0"
+ruff = "0.8.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+
+[tool.ruff]
+target-vrsion = 'py312'
