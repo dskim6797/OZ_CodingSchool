@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
-# from app.schemas.comment import CommentRead
+from app.schemas.comment import CommentRead
 
 class PostBase(BaseModel):
     title: str = Field(min_length=1, max_length=200)
@@ -18,6 +18,6 @@ class PostRead(PostBase):
     owner_id: int
     created_at: datetime | None = None
     updated_at: datetime | None = None
-    # comments: list[CommentRead] = []   # 🔁 중첩 스키마
+    comments: list[CommentRead] = []   # 🔁 중첩 스키마
 
     model_config = ConfigDict(from_attributes=True)

@@ -32,7 +32,7 @@ class User(Base):
 
     posts = relationship("Post", back_populates="owner", cascade="all, delete-orphan")
     comments = relationship("Comment", back_populates="owner", cascade="all, delete-orphan")
-
+    
     # (선택) 복합 인덱스 등
     # __table_args__ = (
     #     # 자주 username+email 동시 조건 검색이 있다면 비유니크 복합 인덱스 유지
