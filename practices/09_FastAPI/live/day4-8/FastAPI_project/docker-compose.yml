@@ -1,7 +1,9 @@
+version: '3.8'
+
 services:
   db:
     image: postgres:16
-    container_name: fastapi_project_db # my_blog_db
+    container_name: diary_db # my_blog_db
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
