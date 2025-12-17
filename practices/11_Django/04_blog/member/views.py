@@ -27,7 +27,7 @@ def login(request):
 
     if form.is_valid():
         django_login(request, form.get_user())
-        return redirect(reverse('blog_home'))
+        return redirect(reverse('blog_list'))
 
     context = {
         'form':form
