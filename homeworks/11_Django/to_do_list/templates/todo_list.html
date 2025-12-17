@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>To Do List</h1>
+    {% for item in todo_table %}
+        <p>
+            <a href = "/todo/{{ item.id }}/">
+                {{ item.title }}
+            </a>
+        </p>
+    {% endfor %}
+</body>
+</html>
