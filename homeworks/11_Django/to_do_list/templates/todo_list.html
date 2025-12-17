@@ -5,13 +5,33 @@
     <title>Title</title>
 </head>
 <body>
+    <nav>
+        {% if request.user.is_authenticated %}
+            <div style="text-align: right">
+                <span>{{ request.user.username }}님</span>
+                <form action="{% url 'logout' %}" method="POST" style="display: inline">
+                    {% csrf_token %}
+                    <button>로그아웃</button>
+                </form>
+            </div>
+        {% else %}
+            <div style="text-align: right">
+                <a href="{% url 'signup' %}">회원가입</a>
+                <a href="{% url 'login' %}">로그인</a>
+            </div>
+        {% endif %}
+    </nav>
     <h1>To Do List</h1>
-    {% for todo in todos %}
-        <p>
-            <a href = "/todo/{{ todo.id }}/">
-                {{ todo.title }}
-            </a>
-        </p>
-    {% endfor %}
+    {% if request.user.is_authenticated %}
+        {% for todo in todos %}
+            <p>
+                <a href = "/todo/{{ todo.id }}/">
+                    {{ todo.title }}
+                </a>
+            </p>
+        {% endfor %}
+    {% else %}
+        <p>로그인 후 이용 할 수 있습니다.</p>
+    {% endif %}
 </body>
 </html>
