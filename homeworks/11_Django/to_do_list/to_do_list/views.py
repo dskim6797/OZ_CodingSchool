@@ -1,17 +1,19 @@
 from django.shortcuts import render, get_object_or_404
-from to_do_list.models import Todolist
+from to_do_list.models import Todo
 
 def todo_list(request):
-    todo_table = Todolist.objects.all()
+    todo_id_title = Todo.objects.all().values_list('id', 'title')
+    todos = [{'id': todo[0], 'title': todo[1]} for todo in todo_id_title]
+
     context = {
-        'todo_table':todo_table
+        'todos':todos
     }
 
     return render(request, 'todo_list.html',context)
 
 
 def todo_info(request, pk):
-    todo = get_object_or_404(Todolist, pk=pk)
+    todo = get_object_or_404(Todo, pk=pk)
     context = {
         'todo':todo
     }

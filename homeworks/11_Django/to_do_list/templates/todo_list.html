@@ -6,10 +6,10 @@
 </head>
 <body>
     <h1>To Do List</h1>
-    {% for item in todo_table %}
+    {% for todo in todos %}
         <p>
-            <a href = "/todo/{{ item.id }}/">
-                {{ item.title }}
+            <a href = "/todo/{{ todo.id }}/">
+                {{ todo.title }}
             </a>
         </p>
     {% endfor %}
