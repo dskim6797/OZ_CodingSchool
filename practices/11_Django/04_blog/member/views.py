@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login as django_login
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse
 
 def sign_up(request):
@@ -27,6 +27,11 @@ def login(request):
 
     if form.is_valid():
         django_login(request, form.get_user())
+
+        next = request.GET.get('next')
+        if next:
+            return redirect(next)
+
         return redirect(reverse('blog_list'))
 
     context = {

@@ -24,6 +24,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', blog_views.blog_list, name='blog_list'),
     path('<int:pk>/', blog_views.blog_detail, name='blog_detail'),
+    path('create/', blog_views.blog_create, name='blog_create'),
+    path('<int:pk>/update/',blog_views.blog_update, name='blog_update'),
+    path('<int:pk>/delete/', blog_views.blog_delete, name='blog_delete'),
+
+    # auth
     path('accounts/',include('django.contrib.auth.urls')),
     path('signup/',member_views.sign_up, name='signup'),
     path('login/',member_views.login, name='login'),
