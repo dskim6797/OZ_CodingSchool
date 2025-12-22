@@ -1,29 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <nav>
-        {% if request.user.is_authenticated %}
-            <div style="text-align: right">
-                <span>{{ request.user.username }}님</span>
-                <form action="{% url 'logout' %}" method="POST" style="display: inline">
-                    {% csrf_token %}
-                    <button>로그아웃</button>
-                </form>
-            </div>
-        {% else %}
-            <div style="text-align: right">
-                <a href="{% url 'signup' %}">회원가입</a>
-                <a href="{% url 'login' %}">로그인</a>
-            </div>
-        {% endif %}
-    </nav>
+{% extends 'base.html' %}
+{% block content %}
     <h1>To Do List</h1>
+    <p style="text-align: right">
+        <a href="{% url 'todo_create' %}">생성</a>
+    </p>
     {% if request.user.is_authenticated %}
-        {% for todo in todos %}
+        {% for todo in page_object %}
             <p>
                 <a href = "/todo/{{ todo.id }}/">
                     {{ todo.title }}
@@ -33,5 +15,38 @@
     {% else %}
         <p>로그인 후 이용 할 수 있습니다.</p>
     {% endif %}
-</body>
-</html>
+
+    <form method="get" style="margin-bottom: 10px;">
+        <input name="q" type="text" placeholder="검색어를 입력하세요." value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}">
+        <button>검색</button>
+    </form>
+
+    <!-- Paginator -->
+    <div class="pagination">
+        {% if page_object.has_previous %}
+            <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo; 첫번째</a>
+            <a href="?page={{ page_object.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">이전</a>
+        {% endif %}
+
+        {% if page_object.number|add:-2 > 1 %}
+            <a href="?page={{ page_object.number|add:-3 }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&hellip;</a>
+        {% endif %}
+
+        {%  for i in page_object.paginator.page_range %}
+            {% if page_object.number == i %}
+                <span style="font-weight: bold">{{ i }}</span>
+            {% elif i > page_object.number|add:-3 and i < page_object.number|add:3 %}
+                <a href="?page={{ i }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_object.number|add:2 < page_object.paginator.num_pages %}
+            <a href="?page={{ page_object.number|add:3 }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&hellip;</a>
+        {% endif %}
+
+        {% if page_object.has_next %}
+            <a href="?page={{ page_object.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">다음</a>
+            <a href="?page={{ page_object.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">마지막 &raquo;</a>
+        {% endif %}
+    </div>
+{% endblock %}
