@@ -1,15 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
     <h1>{{ todo.title }}</h1>
     <hr>
-    <p>세부 내용: {{ todo.description }}</p>
-    <p>시작 일시: {{ todo.start_date }}</p>
-    <p>종료 일시: {{ todo.end_date }}</p>
-    <p>완료 여부: {{ todo.is_completed }}</p>
-</body>
-</html>
+    <div style="text-align: right">
+        <a href="{% url 'todo_update' todo.id %}">수정</a>
+
+        <form action="{% url 'todo_delete' todo.id %}" method="POST" style="display: inline">
+            {% csrf_token %}
+            <button>삭제</button>
+        </form>
+    </div>
+
+    <div>
+        <table>
+            {% for key, value in todo.items %}
+                {% if key == 'description' or key == 'start_date' or key == 'end_date' or key == 'is_completed' %}
+                    <tr>
+                        <th>{{ key }}</th>
+                        <td>{{ value }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
